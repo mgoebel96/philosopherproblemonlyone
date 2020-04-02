@@ -1,6 +1,8 @@
-public class Logger {
+package de.netempire.logger;
 
-    private Logger() {
+public class MyLogger {
+
+    private MyLogger() {
         throw new IllegalStateException("Logger class");
     }
 

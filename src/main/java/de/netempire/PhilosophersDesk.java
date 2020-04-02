@@ -1,3 +1,11 @@
+package de.netempire;
+
+import de.netempire.classes.Fork;
+import de.netempire.classes.Philosopher;
+import de.netempire.logger.ResultLogger;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
@@ -5,13 +13,15 @@ import java.util.concurrent.TimeUnit;
 
 public class PhilosophersDesk {
 
-    static Semaphore eatingPhilosopher = new Semaphore(1, true);
+    public static Semaphore eatingPhilosopher = new Semaphore(1, true);
 
     public static void main(String[] args) {
         startProcess();
     }
 
     private static void startProcess() {
+        Date start = Calendar.getInstance().getTime();
+
         Fork fork1 = new Fork();
         Fork fork2 = new Fork();
         Fork fork3 = new Fork();
@@ -44,12 +54,17 @@ public class PhilosophersDesk {
                 aristoteles.stop();
                 schlegel.stop();
                 executor.shutdown();
-                System.out.println("Der Tisch ist kaputt...");
+                System.out.println("Der Abend wird beendet.");
+                ResultLogger.log("Die Philosophen haben " + computeDuration(start, Calendar.getInstance().getTime()) + " Sekunden zusammen am Tisch gesessen.");
             }
         };
         executor.scheduleAtFixedRate(controller, 0, 4, TimeUnit.SECONDS);
         Thread task2Thread = new Thread(controller);
         task2Thread.start();
+    }
 
+    public static int computeDuration(Date to, Date from) {
+        long difference = from.getTime() - to.getTime();
+        return (int) (difference/1000);
     }
 }

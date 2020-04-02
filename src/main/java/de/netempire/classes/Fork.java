@@ -1,4 +1,6 @@
-class Fork {
+package de.netempire.classes;
+
+public class Fork {
 
     boolean taken;
 
@@ -11,5 +13,4 @@ class Fork {
         // Fork is taken from the table. -> status: taken
         taken = true;
     }
-
 }
