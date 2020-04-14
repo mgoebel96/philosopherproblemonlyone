@@ -31,7 +31,7 @@ public class PhilosophersDesk {
     static Thread herderThread = new Thread(herder);
     static Date start = Calendar.getInstance().getTime();
     static ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    static Thread task2Thread = new Thread();
+    static Runnable controller;
 
     public static void main(String[] args) {
         startProcess();
@@ -48,7 +48,7 @@ public class PhilosophersDesk {
         herder.setEatingTime(300);
         fichte.setEatingTime(1500);
         schlegel.setEatingTime(500);
-        Runnable controller = () -> {
+        controller = () -> {
             if (!platonThread.isAlive() && !herderThread.isAlive() && !aristotelesThread.isAlive() && !fichteThread.isAlive() && !schlegelThread.isAlive()) {
                 platon.stop();
                 herder.stop();
@@ -60,8 +60,6 @@ public class PhilosophersDesk {
                 ResultLogger.log("Die Philosophen haben " + computeDuration(start, Calendar.getInstance().getTime()) + " Sekunden zusammen am Tisch gesessen.");
             }
         };
-        executor.scheduleAtFixedRate(controller, 0, 4, TimeUnit.SECONDS);
-        task2Thread = new Thread(controller);
     }
 
     public static void start(){
@@ -70,7 +68,7 @@ public class PhilosophersDesk {
         schlegelThread.start();
         fichteThread.start();
         herderThread.start();
-        task2Thread.start();
+        executor.scheduleAtFixedRate(controller, 0, 4, TimeUnit.SECONDS);
     }
 
     public static int computeDuration(Date to, Date from) {
