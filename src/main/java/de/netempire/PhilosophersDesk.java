@@ -28,11 +28,16 @@ public class PhilosophersDesk {
         Fork fork4 = new Fork();
         Fork fork5 = new Fork();
 
-        Philosopher platon = new Philosopher("Platon",fork1, fork2);
-        Philosopher aristoteles = new Philosopher("Aristoteles", fork2, fork3);
+        Philosopher platon = new Philosopher("Platon", fork1, fork2);
+        platon.setEatingTime(750);
+        Philosopher aristoteles = new Philosopher("Aristoteles",fork2, fork3);
+        aristoteles.setEatingTime(1000);
         Philosopher herder = new Philosopher("Herder", fork3, fork4);
+        herder.setEatingTime(300);
         Philosopher fichte = new Philosopher("Fichte", fork4, fork5);
-        Philosopher schlegel = new Philosopher("Schlegel",fork5, fork1);
+        fichte.setEatingTime(1500);
+        Philosopher schlegel = new Philosopher("Schlegel", fork5, fork1);
+        schlegel.setEatingTime(500);
 
         Thread platonThread = new Thread(platon);
         platonThread.start();

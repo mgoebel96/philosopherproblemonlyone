@@ -10,6 +10,7 @@ public class Philosopher implements Runnable {
     public String name;
     public Fork right, left;
     private volatile boolean exit = false;
+    private int eatingTime;
 
     public Philosopher(String name, Fork right, Fork left){
         this.name = name;
@@ -48,5 +49,13 @@ public class Philosopher implements Runnable {
 
     public void stop(){
         exit = true;
+    }
+
+    public int getEatingTime() {
+        return eatingTime;
+    }
+
+    public void setEatingTime(int eatingTime) {
+        this.eatingTime = eatingTime;
     }
 }
