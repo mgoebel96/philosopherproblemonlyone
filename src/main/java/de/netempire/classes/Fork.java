@@ -9,7 +9,7 @@ public class Fork {
         taken = false;
     }
 
-    void get() throws InterruptedException {
+    void get() {
         // Fork is taken from the table. -> status: taken
         taken = true;
     }

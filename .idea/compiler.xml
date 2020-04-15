@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="philosopherproblemonlyone" />
+        <module name="pponlyone" />
         <module name="philosopherproblem" />
       </profile>
     </annotationProcessing>

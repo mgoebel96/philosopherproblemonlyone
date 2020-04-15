@@ -7,10 +7,11 @@ import static java.lang.Thread.sleep;
 
 public class Philosopher implements Runnable {
 
-    public String name;
-    public Fork right, left;
+    String name;
+    Fork right, left;
     private volatile boolean exit = false;
     private int eatingTime;
+
 
     public Philosopher(String name, Fork right, Fork left){
         this.name = name;
@@ -36,7 +37,7 @@ public class Philosopher implements Runnable {
                 left.get();
                 MyLogger.printOut (name + " hat zwei Gabeln. Er kann essen.");
                 // holding two forks -> can eat now
-                sleep(1000);
+                sleep(eatingTime);
             } catch (InterruptedException e) {
                 MyLogger.printOut (e.getMessage());
             }
@@ -49,10 +50,6 @@ public class Philosopher implements Runnable {
 
     public void stop(){
         exit = true;
-    }
-
-    public int getEatingTime() {
-        return eatingTime;
     }
 
     public void setEatingTime(int eatingTime) {
